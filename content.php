@@ -4,10 +4,10 @@
 <div class="row">
     <?php
     if ($_GET["page"]=="Contribuables" && isset($_GET["action"])==false ) {
-        include 'CRUD\contribuables\list.php';
+        include './CRUD\contribuables\list.php';
     }
     if ($_GET["page"]=="Contribuables" && $_GET["action"]=="add" ) {
-        include 'CRUD\contribuables\add.php';
+        include './CRUD\contribuables\add.php';
     }
 
     if ($_GET["page"]=="Demandes" && $_GET["action"]=="add" ) {
