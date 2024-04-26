@@ -28,12 +28,12 @@
                     </label>
                 </div>
                 <div class="datatable-search">
-                    <input class="datatable-input" placeholder="Search..." type="search" title="Search within table"
+                    <input class="datatable-input" id="searchInput" placeholder="Search..." type="search" title="Search within table"
                         aria-controls="datatablesSimple">
                 </div>
             </div>
             <div class="datatable-container">
-                <table id="datatablesSimple" class="datatable-table">
+                <table id="contribualesTable" class="datatable-table">
                     <thead>
                         <tr>
                             <th data-sortable="true" style="width: 19.25936599423631%;"><a href="#"
@@ -44,63 +44,85 @@
                                     class="datatable-sorter">Nom & Prenom</a></th>
                             <th data-sortable="true" style="width: 14.741594620557157%;"><a href="#"
                                     class="datatable-sorter">Address</a></th>
-                            <th data-sortable="true" style="width: 14.505283381364073%;"><a href="#"
+                            <th data-sortable="true" style="width: 9.505283381364073%;"><a href="#"
                                     class="datatable-sorter">Ville</a></th>
-                            <th data-sortable="true" style="width: 12.295869356388089%;"><a href="#"
+                            <th data-sortable="true" style="width: 15.295869356388089%;"><a href="#"
                                     class="datatable-sorter">Action</a></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr data-index="0">
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr data-index="1">
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr data-index="2">
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
+                    <tbody id="contribualesBody">
+                        <!-- Contribuales data will be populated here -->
                     </tbody>
                 </table>
             </div>
             <div class="datatable-bottom">
                 <div class="datatable-info">Showing 1 to 10 of 57 entries</div>
                 <nav class="datatable-pagination">
-                    <ul class="datatable-pagination-list">
-                        <li class="datatable-pagination-list-item datatable-hidden datatable-disabled"><a data-page="1"
-                                class="datatable-pagination-list-item-link">‹</a></li>
-                        <li class="datatable-pagination-list-item datatable-active"><a data-page="1"
-                                class="datatable-pagination-list-item-link">1</a></li>
-                        <li class="datatable-pagination-list-item"><a data-page="2"
-                                class="datatable-pagination-list-item-link">2</a></li>
-                        <li class="datatable-pagination-list-item"><a data-page="3"
-                                class="datatable-pagination-list-item-link">3</a></li>
-                        <li class="datatable-pagination-list-item"><a data-page="4"
-                                class="datatable-pagination-list-item-link">4</a></li>
-                        <li class="datatable-pagination-list-item"><a data-page="5"
-                                class="datatable-pagination-list-item-link">5</a></li>
-                        <li class="datatable-pagination-list-item"><a data-page="6"
-                                class="datatable-pagination-list-item-link">6</a></li>
-                        <li class="datatable-pagination-list-item"><a data-page="2"
-                                class="datatable-pagination-list-item-link">›</a></li>
+                    <ul id="pagination" class="datatable-pagination-list">
+                        <!-- Pagination will be populated here -->
                     </ul>
                 </nav>
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const tableBody = document.getElementById('contribualesBody');
+        const pagination = document.getElementById('pagination');
+        const searchInput = document.getElementById('searchInput');
+
+        // Function to fetch contribuales data from API
+        const fetchContribuales = async () => {
+            try {
+                const response = await fetch('API.php?action=GetContribuales');
+                const data = await response.json();
+                return data.data; // Return only the contribuales data
+            } catch (error) {
+                console.error('Error:', error);
+                return [];
+            }
+        };
+
+        // Function to populate table with contribuales data
+        const populateTable = async () => {
+            const contribuales = await fetchContribuales();
+
+            // Clear existing table data
+            tableBody.innerHTML = '';
+
+            // Populate table rows with contribuales data
+            contribuales.forEach(contribuale => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${contribuale.identifiant}</td>
+                    <td>${contribuale.CIN}</td>
+                    <td>${contribuale.fullName}</td>
+                    <td>${contribuale.address}</td>
+                    <td>${contribuale.Ville}</td>
+                    <td>
+                       <button class="btn btn-primary btn-sm">Modifier</button>
+                       <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        };
+
+        // Initial population of the table
+        await populateTable();
+
+        // Search functionality
+        searchInput.addEventListener('input', async () => {
+            const searchValue = searchInput.value.toLowerCase();
+            const filteredContribuales = (await fetchContribuales()).filter(contribuale => {
+                return contribuale.identifiant.toLowerCase().includes(searchValue) ||
+                       contribuale.CIN.toLowerCase().includes(searchValue) ||
+                       contribuale.fullName.toLowerCase().includes(searchValue) ||
+                       contribuale.address.toLowerCase().includes(searchValue) ||
+                       contribuale.Ville.toLowerCase().includes(searchValue);
+            });
+            populateTable(filteredContribuales);
+        });
+    });
+</script>

@@ -3,23 +3,20 @@
         <h3 class="font-weight-light my-4">Etablir une demande</h3>
     </div>
     <div class="card-body">
-        <form>
-        <div class="row mb-3">
+        <form id="demandeForm">
+            <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating">
-                    <input class="form-control" id="cin" type="text" placeholder="CIN">
+                        <input class="form-control" id="cin" type="text" placeholder="CIN">
                         <label for="Destination">CIN</label>
+                        <a class="btn" id="refreshButton" style="color: #0d6efd ; "> <i class="fa fa-refresh"
+                                aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="mt-2 col-md-6">
                     <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <td>04540</td>
-                                <td>Ilyas el harrak </td>
-                                <td>Fes</td>
-                                <td>Address</td>
-                            </tr>
+                        <tbody id="contribualeInfo">
+
                         </tbody>
                     </table>
                 </div>
@@ -27,30 +24,8 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <select class="form-control" name="destination" id="">
-                            <option value="">B.ORDRE</option>
-                            <option value="">B. TRAITEMENT</option>
-                            <option value="">DIRECTION PROVINCIALE DES IMPOTS DE TETOUAN</option>
-                            <option value="">E.T.CONTROLE TETOUAN</option>
-                            <option value="">RECETTE ADMINISTRATION FISCAL</option>
-                            <option value="">RESTITUTION IR/SALAIRE</option>
-                            <option value="">Sec 1 Sub Des Pro Tétouan 1</option>
-                            <option value="">Sec 2 Sub Des Pro Tétouan 1</option>
-                            <option value="">Sec 3 Sub Des Pro Tétouan 1</option>
-                            <option value="">SECTEUR 1 SUB FISC.PARTICULIER TETOUAN 2</option>
-                            <option value="">Section Emission et titre d annulation</option>
-                            <option value="">SECTION EXONERATIONS-REMBOURSEMENTS ET IR/SALAIRES</option>
-                            <option value="">SECTION SURVEILLANCE</option>
-                            <option value="">SERVICE DES RESSOURCE ET SU SYSTEME D INFORMATION</option>
-                            <option value="">SERVICE PROVINCIAL D ASSIETTE TETOUAN 1</option>
-                            <option value="">SERVICE PROVINCIAL D ASSIETTE TETOUAN 2</option>
-                            <option value="">SERVICE PROVINCIAL DE VERIFICATION</option>
-                            <option value="">SUB.FISC. PARTICULIERS TETOUAN</option>
-                            <option value="">SUB.FISC.P.PH.PROF TETOUAN 1</option>
-                            <option value="">SUB.FISC.P.PH.PROF TETOUAN 2</option>
-                            <option value="">SUB.PERS.MORALE TETOUAN</option>
-                            <option value="">Subdivision</option>
-                            <option value="">fiscalité des particuliers tetouan 2</option>
+                        <select class="form-control" name="destination" id="destination">
+
                         </select>
                         <label for="Destination">Destination</label>
                     </div>
@@ -58,92 +33,44 @@
                 <div class="col-md-6">
                     <div class="form-floating">
 
-                        <select class="form-control" name="attestation" id="">
-                            <option value=""> ATTESTATION</option>
-                            <option value=""> Courrier divers</option>
-                            <option value=""> DECLARATION CHOMAGE D ETABLISSEMENT</option>
-                            <option value=""> C DECLARATION CONTRIBUTION SOCIALE DES REVENUS</option>
-                            <option value=""> DECLARATION DE CESSATION TEMPORAIRE D ACTIVITE</option>
-                            <option value=""> DECLARATION DE DOMICILIATION LOI 18-21 ART 544-1 DU CODE DE COMMER
-                            </option>
-                            <option value=""> DECLARATION DE TRANSFERT</option>
-                            <option value=""> DECLARATION DE VACANCE: TH/TSC</option>
-                            <option value=""> DECLARATION DES ACTIONS: PARTS SOCIALES ET RVS ASSIM</option>
-                            <option value=""> DECLARATION DU PRORATA DES DEDUCTIONS TVA</option>
-                            <option value=""> DECLARATION INSCRIPTION TSC/TH</option>
-                            <option value=""> DECLARATION IR MOD 9000</option>
-                            <option value=""> DECLARATION RECTIFICATIVE</option>
-                            <option value=""> Declaration TSC et TH</option>
-                            <option value=""> DEMANADE LIQUIDATION</option>
-                            <option value=""> DEMANDE CERTIFICATION BILAN</option>
-                            <option value=""> DEMANDE D ADHESION AU SIMPL</option>
-                            <option value=""> DEMANDE D OPTION AU PAIEMENT SPONTANE DE L IR AFFERENT AU RF</option>
-                            <option value=""> DEMANDE DE CODE D ACCES</option>
-                            <option value=""> DEMANDE DE RADIATION</option>
-                            <option value=""> DEMANDE DE TITRE ANNULATION</option>
-                            <option value=""> DEMANDE DE TRANSFERT</option>
-                            <option value=""> Demande Regeneration Mot de passe SIMPL</option>
-                            <option value=""> DEMANDE RESTITUTION IR SOURCE</option>
-                            <option value=""> DEPOT BILAN</option>
-                            <option value=""> DEPOT DECLARATION DES ELEMENTS IMPOSABLES :TP</option>
-                            <option value=""> DEPOT DOSSIER BOURSE</option>
-                            <option value=""> Fiche de Renseignement</option>
-                            <option value=""> DECLARATION D ACHEVEMENT OU D ADDITION DE CONSTRUCTION DE CHANGEMENT DE
-                                PROPRIETE OU D AFFECTATION D IMMEUBLES</option>
-                            <option value=""> ATTESTA DE NON DEDUCTIBILITE: ASSURANCES +RETRAITE COMPL</option>
-                            <option value=""> ATTESTATION D ACHAT EN EXONERATION</option>
-                            <option value=""> ATTESTATION D EXONERATION: TP</option>
-                            <option value=""> IS C ATTESTATION D EXONERATION: TSC PROM IMMOB</option>
-                            <option value=""> ATTESTATION D INSCRIPTION A LA TP</option>
-                            <option value=""> ATTESTATION DE RADIATION : TP</option>
-                            <option value=""> ATTESTATION DE REGULARITE FISCALE</option>
-                            <option value=""> ATTESTATION DE REVENU EX :4169</option>
-                            <option value=""> Attestation de revenue a la source</option>
-                            <option value=""> ATTESTATION DEBUT D ACTIVITE</option>
-                            <option value=""> ATTESTATION DEBUT D ACTIVITE ET ELIGIBILITE A L EXO :TVA</option>
-                            <option value=""> ATTESTATION DU CHIFFRE D AFFAIRE</option>
-                            <option value=""> Attestation Exoneration TSC TH Construction Nouvelle</option>
-                            <option value=""> Attestation Exoneration TSC/TH</option>
-                            <option value=""> ATTESTATION EXONERATION TSC/TH <200< /option>
-                            <option value=""> ATTESTATION FISCALE</option>
-                            <option value=""> ATTESTATION IDENTIFIANT FISCAL</option>
-                            <option value=""> ATTESTATION IMPOSITION TH/TSC</option>
-                            <option value=""> ATTESTATION RECTIFICATION LIBELLE TSC/TH</option>
-                            <option value=""> ATTESTATION RESIDENCE FISCALE</option>
-                            <option value=""> ATTESTATION TAXE PROFESSIONNELLE</option>
-                            <option value=""> CERTIFICAT DE NON ASSUJETTISSEMENT A L IR RF-TH TSC</option>
-                            <option value=""> CERTIFICAT DE NON IMPOSITION</option>
-                            <option value=""> CERTIFICATION BILAN</option>
-                            <option value=""> DEMANDE D ATTESTATION DE LA VALEURE LOCATIVE</option>
-                            <option value=""> DEMANDE DE BULTIN D IDENTIFICATION FISCALE</option>
-                            <option value=""> DEMANDE DE MAIN LEVEE D HYPOTHEQUE</option>
-                            <option value=""> DEMANDE DE RESTITUTION DE LA CAUTION BANCAIRE</option>
-                            <option value=""> DEPART</option> DEFINITIF QUITUS
+                        <select class="form-control" name="attestation" id="attestation">
+
                         </select>
+
                         <label for="attestation">Attestation</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+
+                        <select class="form-control" name="TypeCourier" id="TypeCourier">
+
+                        </select>
+
+                        <label for="TypeCourier">Type courier</label>
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <select class="form-control" name="destination" id="" multiple>
-                        <option value="">IR</option>
-                        <option value="">IS</option>
-                        <option value="">TVA</option>
-                        <option value="">TSC/TH</option>
-                        <option value="">TVALSM</option>
-                        <option value="">PSM</option>
-                        <option value="">TSAVA</option>
-                        <option value="">IRPI</option>
-                        <option value="">INS prix</option>
-                        <option value="">OR</option>
-                        <option value="">IR RESTITUTION</option>
-                        <option value="">REV.ENREG</option>
+                    <select class="form-control" name="impotConcerne" id="impotConcerne" multiple>
+                        <option value="IR">IR</option>
+                        <option value="IS">IS</option>
+                        <option value="TVA">TVA</option>
+                        <option value="TSC/TH">TSC/TH</option>
+                        <option value="TVALSM">TVALSM</option>
+                        <option value="PSM">PSM</option>
+                        <option value="TSAVA">TSAVA</option>
+                        <option value="IRPI">IRPI</option>
+                        <option value="INS prix">INS prix</option>
+                        <option value="OR">OR</option>
+                        <option value="IR RESTITUTION">IR RESTITUTION</option>
+                        <option value="REV.ENREG">REV.ENREG</option>
                     </select>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" id="inputLastName" type="number" placeholder="Address">
+                        <input class="form-control" id="anneeConcerne" type="number" placeholder="Annes">
                         <label for="inputLastName">Annes</label>
                     </div>
                 </div>
@@ -155,24 +82,241 @@
 
                     <div class="form-floating">
 
-                        <textarea rows="5" cols="60" name="Objet">
-
-                    </textarea>
+                        <textarea rows="5" cols="60" id="objet"></textarea>
+                        <label for="objet"></label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>remarque</label>
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" placeholder="remarque">
+                        <input type="text" class="form-control" id="remarque" placeholder="remarque">
+                        <label for="remarque"></label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Response au</label>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="reponseAu" placeholder="reponseAu">
+                        <label for="reponseAu"></label>
                     </div>
                 </div>
             </div>
 
             <div class="mt-4" style="width: 20%;">
-                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Ajouter</a></div>
+                <button id="addDemande" class="btn btn-primary btn-block">Ajouter</button>
             </div>
         </form>
     </div>
 
 </div>
+
+<!-- Add this script to your HTML file -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to handle refresh button click
+        document.getElementById('refreshButton').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Get the CIN value
+            var cin = document.getElementById('cin').value;
+
+            // Fetch request to get contribuale information
+            fetch('API.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'GetContribualeInfo',
+                    CIN: cin
+                })
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch contribuale information.');
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Clear previous table content
+                    var tableBody = document.getElementById('contribualeInfo');
+                    tableBody.innerHTML = '';
+
+                    // Populate the table with contribuale information
+
+                    var row = document.createElement('tr');
+                    row.innerHTML = '<td>' + data.CIN + '</td>' +
+                        '<td>' + data.fullName + '</td>' +
+                        '<td>' + data.address + '</td>' +
+                        '<td>' + data.Ville + '</td>';
+                    tableBody.appendChild(row);
+
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        });
+
+        // Function to handle form submission when #addDemande is clicked
+        document.getElementById('addDemande').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Get input values
+            const cin = document.getElementById('cin').value;
+            const destination = document.getElementById('destination').value;
+            const attestation = document.getElementById('attestation').value;
+            const impotConcerne = Array.from(document.getElementById('impotConcerne').selectedOptions).map(option => option.value).toString();
+            const objet = document.getElementById('objet').value;
+            const remarque = document.getElementById('remarque').value;
+            const TypeCourier =document.getElementById('TypeCourier').value;
+            const anneeConcerne =document.getElementById('anneeConcerne').value;
+            const reponseAu =document.getElementById('reponseAu').value;
+
+            // Prepare data object
+            const data = {
+                action: 'AddDemande',
+                cin: cin,
+                destination: destination,
+                TypeCourier: TypeCourier,
+                attestation: attestation,
+                anneeConcerne: anneeConcerne,
+                impotConcerne: impotConcerne,
+                objet: objet,
+                remarque: remarque,
+                reponseAu:reponseAu
+            };
+
+            // Send POST request to API.php
+            fetch('API.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.replace("index.php?page=recu&demande_id="+data);
+
+                })
+                .catch(error => console.error('Error adding demande:', error));
+        });
+    });
+
+
+    window.onload = function () {
+        // Prepare POST data
+        let postData = {
+            action: 'GetAttestationType'
+        };
+
+        // Configure the fetch request
+        let requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        };
+
+        // Make a request to the API.php to get attestation types
+        fetch('API.php', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                // Assuming data is an array of attestation types
+                const attestationTypes = data;
+
+                // Get the select element
+                const selectElement = document.getElementById('attestation');
+
+                // Clear any existing options
+                selectElement.innerHTML = '';
+
+                // Iterate over the attestation types and create options
+                attestationTypes.forEach(attestation => {
+                    const option = document.createElement('option');
+                    option.value = attestation.name; // Assuming each attestation object has an id property
+                    option.text = attestation.name; // Assuming each attestation object has a name property
+                    selectElement.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching attestation types:', error));
+
+        postData = {
+            action: 'GetDestination'
+        };
+
+        // Configure the fetch request
+        requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        };
+
+        fetch('API.php', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                // Assuming data is an array of destination types
+                const destinationTypes = data;
+
+                // Get the select element
+                const selectElement = document.getElementById('destination');
+
+                // Clear any existing options
+                selectElement.innerHTML = '';
+
+                // Iterate over the destination types and create options
+                destinationTypes.forEach(destination => {
+                    const option = document.createElement('option');
+                    option.value = destination.name; // Assuming each destination object has an id property
+                    option.text = destination.name; // Assuming each destination object has a name property
+                    selectElement.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching destination types:', error));
+    };
+
+
+
+    postData = {
+        action: 'GetTypeCourier'
+    };
+
+    // Configure the fetch request
+    requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+    };
+
+    fetch('API.php', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            // Assuming data is an array of destination types
+            const TypeCourierTypes = data;
+
+            // Get the select element
+            const selectElement = document.getElementById('TypeCourier');
+
+            // Clear any existing options
+            selectElement.innerHTML = '';
+
+            // Iterate over the destination types and create options
+            TypeCourierTypes.forEach(TypeCourier => {
+                const option = document.createElement('option');
+                option.value = TypeCourier.name; // Assuming each destination object has an id property
+                option.text = TypeCourier.name; // Assuming each destination object has a name property
+                selectElement.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching destination types:', error));
+    
+
+
+
+</script>
