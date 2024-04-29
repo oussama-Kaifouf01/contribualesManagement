@@ -87,27 +87,52 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label>remarque</label>
+                    <div class="mt-4">
+                        <select class="form-control" name="objet2" id="objet2">
+                            <option value="objet 1">objet 1</option>
+                            <option value="objet 2">objet 2</option>
+                            <option value="objet 3">objet 3</option>
+                            <option value="objet 4">objet 4</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>remarque</label>
                     <div class="form-floating">
                         <input type="text" class="form-control" id="remarque" placeholder="remarque">
                         <label for="remarque"></label>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label>Response au</label>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="reponseAu" placeholder="reponseAu">
-                        <label for="reponseAu"></label>
+                    <div class="mt-4">
+                        <select class="form-control" name="remarque2" id="remarque2">
+                            <option value="remarque 1">remarque 1</option>
+                            <option value="remarque 2">remarque 2</option>
+                            <option value="remarque 3">remarque 3</option>
+                            <option value="remarque 4">remarque 4</option>
+                        </select>
                     </div>
                 </div>
+                
             </div>
-
-            <div class="mt-4" style="width: 20%;">
-                <button id="addDemande" class="btn btn-primary btn-block">Ajouter</button>
-            </div>
-        </form>
     </div>
+    <div class="col-md-6">
+        <label>Response au</label>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="reponseAu" placeholder="reponseAu">
+            <label for="reponseAu"></label>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4" style="width: 20%;">
+    <button id="addDemande" class="btn btn-primary btn-block">Ajouter</button>
+</div>
+</form>
+</div>
 
 </div>
 
@@ -168,10 +193,12 @@
             const attestation = document.getElementById('attestation').value;
             const impotConcerne = Array.from(document.getElementById('impotConcerne').selectedOptions).map(option => option.value).toString();
             const objet = document.getElementById('objet').value;
+            const objet2 = document.getElementById('objet2').value;
             const remarque = document.getElementById('remarque').value;
-            const TypeCourier =document.getElementById('TypeCourier').value;
-            const anneeConcerne =document.getElementById('anneeConcerne').value;
-            const reponseAu =document.getElementById('reponseAu').value;
+            const remarque2 = document.getElementById('remarque2').value;
+            const TypeCourier = document.getElementById('TypeCourier').value;
+            const anneeConcerne = document.getElementById('anneeConcerne').value;
+            const reponseAu = document.getElementById('reponseAu').value;
 
             // Prepare data object
             const data = {
@@ -183,8 +210,10 @@
                 anneeConcerne: anneeConcerne,
                 impotConcerne: impotConcerne,
                 objet: objet,
+                objet2: objet2,
                 remarque: remarque,
-                reponseAu:reponseAu
+                remarque2: remarque2,
+                reponseAu: reponseAu
             };
 
             // Send POST request to API.php
@@ -197,7 +226,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    window.location.replace("index.php?page=recu&demande_id="+data);
+                    window.location.replace("index.php?page=recu&demande_id=" + data);
 
                 })
                 .catch(error => console.error('Error adding demande:', error));
@@ -315,7 +344,7 @@
             });
         })
         .catch(error => console.error('Error fetching destination types:', error));
-    
+
 
 
 

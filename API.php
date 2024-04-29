@@ -36,10 +36,79 @@ switch ($action) {
     case 'AddDemande':
         handleAddCourierAndDemande($data, $conn);
         break;
-    case 'GetReceiptData':
+    case 'GetReceipt':
         handleGetReceiptData($data, $conn);
         break;
+    case 'GetReceiptData':
+        // Get filter parameters
+        $startDate = isset($data->startDate) ? $data->startDate : null;
+        $endDate = isset($data->endDate) ? $data->endDate : null;
+        $typeCourier = isset($data->typeCourier) ? $data->typeCourier : null;
+        $typeDestination = isset($data->typeDestination) ? $data->typeDestination : null;
+        $typeAttestation = isset($data->typeAttestation) ? $data->typeAttestation : null;
+        $CIN = isset($data->CIN) ? $data->CIN : null;
+
+        // Generate filter query
+        $sql = generateFilterQuery($startDate, $endDate, $typeCourier, $typeDestination, $typeAttestation, $CIN);
+        
+        // Execute the query
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            // Fetch data
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            // Return data as JSON
+            echo json_encode($rows);
+        } else {
+            // No data found based on filters
+            echo json_encode(['success' => false, 'message' => 'No data found based on provided filters']);
+        }
+        break;
+
+
 }
+
+
+function generateFilterQuery($startDate, $endDate, $typeCourier, $typeDestination, $typeAttestation, $CIN)
+{
+    // Initialize the base query
+    $sql = "SELECT d.*, c.*, co.* FROM demande d
+            JOIN contribuale c ON d.idContribuale = c.CIN
+            JOIN courier co ON d.idCourier = co.id";
+
+    // Add filters based on provided parameters
+    $whereClauses = [];
+    if ($startDate && $endDate) {
+        if ($startDate === $endDate) {
+            // Adjust the end date to the end of the day
+            $endDate = date('Y-m-d 23:59:59', strtotime($endDate));
+        }
+        $whereClauses[] = "d.date BETWEEN '$startDate' AND '$endDate'";
+    }
+    if ($typeCourier) {
+        $whereClauses[] = "co.typeCourier = '$typeCourier'";
+    }
+    if ($typeDestination) {
+        $whereClauses[] = "co.destination = '$typeDestination'";
+    }
+    if ($typeAttestation) {
+        $whereClauses[] = "co.typeAttestation = '$typeAttestation'";
+    }
+    if ($CIN) {
+        $whereClauses[] = "c.CIN = '$CIN'";
+    }
+
+    // Combine all where clauses
+    if (!empty($whereClauses)) {
+        $sql .= " WHERE " . implode(" AND ", $whereClauses);
+    }
+
+    return $sql;
+}
+
 function handleGetReceiptData($data, $conn)
 {
     // Check if demande ID is provided in the request
@@ -82,12 +151,14 @@ function handleAddCourierAndDemande($data, $conn)
     $impotConcerne = $data->impotConcerne; // Convert array to comma-separated string
     $typeCourier = $data->TypeCourier;
     $remarque = $data->remarque;
+    $remarque2 = $data->remarque2;
     $anneeConcerne = $data->anneeConcerne;
     $responseAu = $data->responseAu;
     $objet = $data->objet;
+    $objet2 = $data->objet2;
     // Add data to the `courier` table
-    $sqlCourier = "INSERT INTO courier (destination, typeCourier, typeAttestation, impotConcerne,anneeConcerne, remarque,objet,reponseAu) 
-                   VALUES ('$destination', '$typeCourier', '$attestation', '$impotConcerne','$anneeConcerne', '$remarque','$objet','$responseAu')";
+    $sqlCourier = "INSERT INTO courier (destination, typeCourier, typeAttestation, impotConcerne,anneeConcerne, remarque,objet,remarque2,objet2,reponseAu) 
+                   VALUES ('$destination', '$typeCourier', '$attestation', '$impotConcerne','$anneeConcerne', '$remarque','$objet','$remarque2','$objet2','$responseAu')";
 
     if ($conn->query($sqlCourier) === TRUE) {
         // Get the ID of the inserted courier

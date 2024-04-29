@@ -61,7 +61,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    action: 'GetReceiptData',
+                    action: 'GetReceipt',
                     demande_id: demandeId // Include demande ID in the request body
                 })
             })
@@ -87,7 +87,9 @@
                     html += '<li class="list-group-item"><strong>Année Concernée:</strong> ' + data.anneeConcerne + '</li>';
                     html += '<li class="list-group-item"><strong>Impôt Concerné:</strong> ' + data.impotConcerne + '</li>';
                     html += '<li class="list-group-item"><strong>Objet:</strong> ' + data.objet + '</li>';
+                                        html += '<li class="list-group-item"><strong>Objet2:</strong> ' + data.objet2 + '</li>';
                     html += '<li class="list-group-item"><strong>Remarque:</strong> ' + data.remarque + '</li>';
+                                        html += '<li class="list-group-item"><strong>Remarque2:</strong> ' + data.remarque2 + '</li>';
                     html += '<li class="list-group-item"><strong>Réponse à:</strong> ' + data.reponseAu + '</li>';
                     html += '</ul>';
                     receiptBody.innerHTML = html;
