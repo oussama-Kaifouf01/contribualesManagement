@@ -340,6 +340,10 @@
         .catch(error => console.error('Error fetching destination types:', error));
 
 
+
+
+
+        window.onload = function () {
     // Fetch objet2 data
     fetch('API.php', {
         method: 'POST',
@@ -387,8 +391,8 @@
         });
     })
     .catch(error => console.error('Error fetching remarque2 data:', error));
-
-
+};
 
 
 </script>
+

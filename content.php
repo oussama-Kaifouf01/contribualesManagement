@@ -15,7 +15,22 @@
     else if ($_GET["page"]=="Demandes" && !isset($_GET["action"]) ) {
         include 'CRUD/demandes/list.php';
     }
-
+    else if ($_GET["page"]=="typeCourier" && !isset($_GET["action"]) ) {
+        include 'CRUD/options/typeCourier.php';
+    }
+    else if ($_GET["page"]=="typeAttestation" && !isset($_GET["action"]) ) {
+        include 'CRUD/options/typeAttestation.php';
+    }
+    else if ($_GET["page"]=="typeDestination" && !isset($_GET["action"]) ) {
+        include 'CRUD/options/typeDestination.php';
+    } 
+    else if ($_GET["page"]=="objet2" && !isset($_GET["action"]) ) {
+        include 'CRUD/options/objet2.php';
+    }
+    else if ($_GET["page"]=="remarque2" && !isset($_GET["action"]) ) {
+        include 'CRUD/options/remarque2.php';
+    }
+    
     
 
 

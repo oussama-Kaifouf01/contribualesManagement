@@ -28,8 +28,8 @@
                     </label>
                 </div>
                 <div class="datatable-search">
-                    <input class="datatable-input" id="searchInput" placeholder="Search..." type="search" title="Search within table"
-                        aria-controls="datatablesSimple">
+                    <input class="datatable-input" id="searchInput" placeholder="Search..." type="search"
+                        title="Search within table" aria-controls="datatablesSimple">
                 </div>
             </div>
             <div class="datatable-container">
@@ -94,17 +94,50 @@
             // Populate table rows with contribuales data
             contribuales.forEach(contribuale => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${contribuale.identifiant}</td>
-                    <td>${contribuale.CIN}</td>
-                    <td>${contribuale.fullName}</td>
-                    <td>${contribuale.address}</td>
-                    <td>${contribuale.Ville}</td>
-                    <td>
-                       <button class="btn btn-primary btn-sm">Modifier</button>
-                       <button class="btn btn-danger btn-sm">Supprimer</button>
-                    </td>
-                `;
+                const idCell = document.createElement('td');
+                idCell.textContent = contribuale.identifiant;
+
+                const cinCell = document.createElement('td');
+                cinCell.textContent = contribuale.CIN;
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = contribuale.fullName;
+
+                const addressCell = document.createElement('td');
+                addressCell.textContent = contribuale.address;
+
+                const cityCell = document.createElement('td');
+                cityCell.textContent = contribuale.Ville;
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.classList.add('btn', 'btn-danger', 'btn-sm');
+                deleteBtn.textContent = 'Supprimer';
+                deleteBtn.addEventListener('click', () => {
+
+                    const cin = contribuale.CIN;
+                    fetch('API.php', {
+                        method: 'DELETE',
+                        body: JSON.stringify({
+                            action: 'DeleteContribuale',
+                            contribualeId: contribuale.CIN
+                        })
+                    })
+                    .then(() => {
+                            populateTable();
+                        });
+
+                });
+
+                const deleteCell = document.createElement('td');
+                deleteCell.appendChild(deleteBtn);
+
+                row.appendChild(idCell);
+                row.appendChild(cinCell);
+                row.appendChild(nameCell);
+                row.appendChild(addressCell);
+                row.appendChild(cityCell);
+                row.appendChild(deleteCell);
+
                 tableBody.appendChild(row);
             });
         };
@@ -117,10 +150,10 @@
             const searchValue = searchInput.value.toLowerCase();
             const filteredContribuales = (await fetchContribuales()).filter(contribuale => {
                 return contribuale.identifiant.toLowerCase().includes(searchValue) ||
-                       contribuale.CIN.toLowerCase().includes(searchValue) ||
-                       contribuale.fullName.toLowerCase().includes(searchValue) ||
-                       contribuale.address.toLowerCase().includes(searchValue) ||
-                       contribuale.Ville.toLowerCase().includes(searchValue);
+                    contribuale.CIN.toLowerCase().includes(searchValue) ||
+                    contribuale.fullName.toLowerCase().includes(searchValue) ||
+                    contribuale.address.toLowerCase().includes(searchValue) ||
+                    contribuale.Ville.toLowerCase().includes(searchValue);
             });
             populateTable(filteredContribuales);
         });
